@@ -13,9 +13,12 @@ const podlet = new Podlet({
   development: true, // optional, defaults to false
 });
 
-let svelteassets = fs.readdirSync('public/build');
+//I will add the global css only once here, and not in the other svelte app
+podlet.css({ value: "http://localhost:7100/css/global.css" });
+app.use("/css", express.static("public/css/"));
 
 // All css and js files in the build folder should be added to the podlet definition.
+let svelteassets = fs.readdirSync('public/build');
 svelteassets.forEach((element, index) => {
   if(element.indexOf('.css') !== -1 && element.indexOf('.css.map') === -1){
     podlet.css({ value: "http://localhost:7100/build/" + element });
@@ -23,12 +26,11 @@ svelteassets.forEach((element, index) => {
     podlet.js({ value: "http://localhost:7100/build/" + element, defer: true });
   }
 });
-// static files
+// create a static link to the files for demo purposes. 
+// In production the localhost URL should be a URL going to a CDN or static file hosting.
 app.use("/build", express.static("public/build/"));
 
-//I will add the global css only once here, and not in the other svelte app
-podlet.css({ value: "http://localhost:7100/css/global.css" });
-app.use("/css", express.static("public/css/"));
+
 
 // apply middleware
 app.use(podlet.middleware());
