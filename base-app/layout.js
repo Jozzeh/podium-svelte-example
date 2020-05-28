@@ -9,7 +9,7 @@ const layout = new Layout({
   pathname: "/", // required
 });
 
-// registering the react micro frontends (podlets)
+// registering the Svelte micro frontends (podlets)
 const sveltemessagepod = layout.client.register({
   name: "svelteMessagePod", // required
   uri: "http://localhost:7100/manifest.json", // required
