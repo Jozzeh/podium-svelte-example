@@ -1,0 +1,33 @@
+{
+  "name": "podium-svelte",
+  "version": "1.0.0",
+  "description": "demo of Svelte micro frontends with Podium",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installAll": "(cd ./base-app && npm install) && (cd ./svelte-message-pod && npm install) && (cd ./svelte-receive-pod && npm install)",
+    "startMessagePod": "(cd ./svelte-message-pod && npm run build && node podlet.js)",
+    "startReceivePod": "(cd ./svelte-receive-pod && npm run build && node podlet.js)",
+    "startBaseApp": "(cd ./base-app && node layout.js)",
+    "start": "npm-run-all -p startMessagePod startReceivePod startBaseApp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jozzeh/podium-svelte-example.git"
+  },
+  "keywords": [
+    "demo",
+    "podium",
+    "micro",
+    "frontend"
+  ],
+  "author": "Jozzeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jozzeh/podium-svelte-example/issues"
+  },
+  "homepage": "https://github.com/Jozzeh/podium-svelte-example#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
